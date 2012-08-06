@@ -38,7 +38,7 @@ public class TheBank
 			try
 			{
 				sBank = new TheBank();
-				//sBank.initDB();
+				sBank.initDB();
 				sBank.init();
 			}
 			catch (SQLException e)
@@ -370,10 +370,10 @@ public class TheBank
 	    lConnection.setCatalog("atmdb");	    
 	    lStatement = lConnection.createStatement();	    
 
-	    lStatement.executeUpdate("DROP TABLE IF EXISTS CARDS");
-	    lStatement.executeUpdate("DROP TABLE IF EXISTS TRANSACTIONS");
-	    lStatement.executeUpdate("DROP TABLE IF EXISTS ACCOUNTS");
-	    lStatement.executeUpdate("DROP TABLE IF EXISTS CLIENTS");	    
+	    //lStatement.executeUpdate("DROP TABLE IF EXISTS CARDS");
+	    //lStatement.executeUpdate("DROP TABLE IF EXISTS TRANSACTIONS");
+	    //lStatement.executeUpdate("DROP TABLE IF EXISTS ACCOUNTS");
+	    //lStatement.executeUpdate("DROP TABLE IF EXISTS CLIENTS");	    
 	    
 	    lDDL = "create table IF NOT EXISTS CLIENTS " +
 		  	     "(" + 
@@ -420,16 +420,16 @@ public class TheBank
 	             ")";	          
 	    lStatement.executeUpdate(lDDL);	    
 
-	    //if (lStatement.executeUpdate("UPDATE CLIENTS SET CLIENT_ID = CLIENT_ID WHERE CLIENT_ID = 0") == 0 )
+	    if (lStatement.executeUpdate("UPDATE CLIENTS SET CLIENT_ID = CLIENT_ID WHERE CLIENT_ID = 0") == 0 )
 	    {
 	    	lStatement.executeUpdate("insert into CLIENTS values(0,'The Bank')");
 	    	lStatement.executeUpdate("insert into CLIENTS values(1,'Rich Client')");	    	
 	    	lStatement.executeUpdate("insert into CLIENTS values(2,'Poor Client')");	    	
-	    	lStatement.executeUpdate("insert into CLIENTS values(3,'Fraudster')");	    	
-	    }
-
+	    	lStatement.executeUpdate("insert into CLIENTS values(3,'Fraudster')");
+	    	
+	    //}
 	    //if (lStatement.executeUpdate("UPDATE ACCOUNTS SET ACCOUNT_ID = ACCOUNT_ID WHERE CLIENT_ID = 0") == 0 )
-	    {
+	    //{
 	    	lStatement.executeUpdate("insert into ACCOUNTS values(1,0,'UAH',0)");
 	    	lStatement.executeUpdate("insert into ACCOUNTS values(2,0,'USD',0)");	    	
 	    	lStatement.executeUpdate("insert into ACCOUNTS values(3,0,'EUR',0)");	    	
@@ -447,11 +447,9 @@ public class TheBank
 	    	lStatement.executeUpdate("insert into ACCOUNTS values(12,3,'RUR',0)");
 	    	lStatement.executeUpdate("insert into ACCOUNTS values(13,3,'EUR',0)");
 	    	lStatement.executeUpdate("insert into ACCOUNTS values(14,3,'UAH',0)");	    	
-	    }
-	    
-
+	    //}
 	    //if (lStatement.executeUpdate("UPDATE CARDS SET CARD_ID = CARD_ID WHERE CARD_ID = 104") == 0 )
-	    {
+	    //{
 	    	lStatement.executeUpdate("insert into CARDS values(104,4,'1111')");
 	    	lStatement.executeUpdate("insert into CARDS values(105,5,'1111')");	    	
 	    	lStatement.executeUpdate("insert into CARDS values(106,6,'1111')");
@@ -460,18 +458,18 @@ public class TheBank
 	    	lStatement.executeUpdate("insert into CARDS values(208,8,'2222')");
 	    	lStatement.executeUpdate("insert into CARDS values(209,9,'2222')");	    	
 
-	    	
 	    	lStatement.executeUpdate("insert into CARDS values(310,10,'3333')");	    	
 	    	lStatement.executeUpdate("insert into CARDS values(311,11,'3333')");	    	
 	    	lStatement.executeUpdate("insert into CARDS values(312,12,'3333')");	    	
 	    	lStatement.executeUpdate("insert into CARDS values(313,13,'3333')");	    	
-	    	lStatement.executeUpdate("insert into CARDS values(314,14,'3333')");	    	
+	    	lStatement.executeUpdate("insert into CARDS values(314,14,'3333')");
+	    	
+	    	lStatement.executeUpdate("delete from TRANSACTIONS");	    	
 	    }
 	    
 	    lStatement.close();
 	    lConnection.close();
 	}
-	
 }
 
 
